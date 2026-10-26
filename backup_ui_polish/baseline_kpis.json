@@ -1,0 +1,207 @@
+{
+  "kpis": {
+    "total_sales": 141783.63,
+    "total_gross_profit": 93442.8,
+    "total_cost": 48340.83,
+    "gross_margin_pct": 65.91,
+    "cost_to_sales_pct": 34.09,
+    "total_units": 38654.0,
+    "total_orders": 8549.0,
+    "total_customers": 5044.0,
+    "total_products": 15.0,
+    "total_divisions": 3.0,
+    "total_regions": 4.0,
+    "total_records": 10194.0
+  },
+  "top5": {
+    "top_n_profit_pct": 95.06,
+    "top_n_revenue_pct": 92.88,
+    "top_profit_products": [
+      "Wonka Bar -Scrumdiddlyumptious",
+      "Wonka Bar - Triple Dazzle Caramel",
+      "Wonka Bar - Milk Chocolate",
+      "Wonka Bar - Nutty Crunch Surprise",
+      "Wonka Bar - Fudge Mallows"
+    ],
+    "top_revenue_products": [
+      "Wonka Bar - Triple Dazzle Caramel",
+      "Wonka Bar -Scrumdiddlyumptious",
+      "Wonka Bar - Milk Chocolate",
+      "Wonka Bar - Fudge Mallows",
+      "Wonka Bar - Nutty Crunch Surprise"
+    ]
+  },
+  "risk_summary": {
+    "total_products": 15.0,
+    "flagged_count": 7.0,
+    "monitor_count": 8.0,
+    "flagged_pct": 46.7,
+    "median_gm_pct": 62.31,
+    "median_cts_pct": 37.69
+  },
+  "division": {
+    "names": [
+      "Chocolate",
+      "Other",
+      "Sugar"
+    ],
+    "sales": [
+      131692.9,
+      9663.25,
+      427.48
+    ],
+    "gross_profit": [
+      88824.62,
+      4333.45,
+      284.73
+    ],
+    "margin_pct": [
+      67.44829827576126,
+      44.8446433653274,
+      66.60662487133902
+    ]
+  },
+  "regional": {
+    "names": [
+      "Pacific",
+      "Atlantic",
+      "Interior",
+      "Gulf"
+    ],
+    "margin_range_pp": 0.96,
+    "min_region": "Atlantic",
+    "max_region": "Interior",
+    "min_margin": 65.47,
+    "max_margin": 66.43
+  },
+  "concentration": {
+    "total_products": 15,
+    "revenue_80_count": 5,
+    "revenue_80_cumulative_pct": 92.88,
+    "profit_80_count": 5,
+    "profit_80_cumulative_pct": 95.06
+  },
+  "product_count": 15,
+  "product_names": [
+    "Wonka Bar -Scrumdiddlyumptious",
+    "Wonka Bar - Triple Dazzle Caramel",
+    "Wonka Bar - Milk Chocolate",
+    "Wonka Bar - Nutty Crunch Surprise",
+    "Wonka Bar - Fudge Mallows",
+    "Lickable Wallpaper",
+    "Wonka Gum",
+    "Everlasting Gobstopper",
+    "Kazookles",
+    "Hair Toffee",
+    "Fizzy Lifting Drinks",
+    "Laffy Taffy",
+    "SweeTARTS",
+    "Nerds",
+    "Fun Dip"
+  ],
+  "product_gp_sorted": [
+    19357.5,
+    18610.2,
+    17443.37,
+    16819.95,
+    16593.6,
+    3930.0,
+    310.7,
+    104.0,
+    92.75,
+    59.5,
+    47.25,
+    33.480000000000004,
+    28.7,
+    7.0,
+    4.8
+  ],
+  "product_gm_sorted": [
+    80.0,
+    77.77777777777779,
+    71.34670487106017,
+    69.44444444444444,
+    66.66666666666666,
+    65.33333333333333,
+    64.92307692307692,
+    62.31155778894474,
+    60.0,
+    52.0,
+    50.0,
+    46.666666666666664,
+    46.666666666666664,
+    40.0,
+    7.6923076923076925
+  ],
+  "segment_summary": [
+    {
+      "Segment": "Core Driver",
+      "Products": 6,
+      "Sales": 131822.9,
+      "Gross Profit": 88928.62,
+      "Avg Gross Margin %": 69.61903770643026,
+      "Revenue Share %": 92.97469672627227,
+      "Profit Share %": 95.1690445919857
+    },
+    {
+      "Segment": "Volume Driver",
+      "Products": 2,
+      "Sales": 8457.5,
+      "Gross Profit": 4240.7,
+      "Avg Gross Margin %": 51.0,
+      "Revenue Share %": 5.965075093647975,
+      "Profit Share %": 4.538284383601519
+    },
+    {
+      "Segment": "Underperformer",
+      "Products": 5,
+      "Sales": 1373.0,
+      "Gross Profit": 180.5,
+      "Avg Gross Margin %": 40.205128205128204,
+      "Revenue Share %": 0.9683769557881965,
+      "Profit Share %": 0.19316630066736018
+    },
+    {
+      "Segment": "Niche Gem",
+      "Products": 2,
+      "Sales": 130.23,
+      "Gross Profit": 92.98,
+      "Avg Gross Margin %": 70.04466778336126,
+      "Revenue Share %": 0.09185122429154903,
+      "Profit Share %": 0.09950472374543572
+    }
+  ],
+  "monthly_totals": {
+    "sales_total": 141783.63,
+    "gp_total": 93442.8,
+    "avg_margin": 65.88392886758055
+  },
+  "yearly_totals": {
+    "years": [
+      2024,
+      2025
+    ],
+    "sales": [
+      57956.2,
+      83827.43000000001
+    ],
+    "gp": [
+      38151.43,
+      55291.37
+    ],
+    "margin": [
+      65.82803910539339,
+      65.95856511406826
+    ]
+  },
+  "total_transactions": 10194,
+  "flagged_product_names": [
+    "Lickable Wallpaper",
+    "Wonka Gum",
+    "Kazookles",
+    "Fizzy Lifting Drinks",
+    "SweeTARTS",
+    "Nerds",
+    "Fun Dip"
+  ]
+}

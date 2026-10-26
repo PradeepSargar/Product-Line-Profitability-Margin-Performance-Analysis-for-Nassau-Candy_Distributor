@@ -4,6 +4,7 @@ Centralized global sidebar filter controls and data quality audit component.
 
 import streamlit as st
 import pandas as pd
+import textwrap
 
 
 def render_sidebar_filters(df: pd.DataFrame) -> dict:
@@ -148,24 +149,22 @@ def render_sidebar_filters(df: pd.DataFrame) -> dict:
     # Filter state indicator
     if is_active:
         pct_kept = (len(filtered_df) / len(df) * 100) if len(df) > 0 else 0
-        st.sidebar.markdown(
-            f"""
+        filter_html = f"""
             <div class="filter-indicator">
                 <b>Filters Active</b><br>
                 Showing <b>{len(filtered_df):,}</b> of {len(df):,} records ({pct_kept:.1f}%)
             </div>
-            """,
-            unsafe_allow_html=True
-        )
+        """
+        from dashboard.utils.dashboard_utils import render_html
+        render_html(filter_html, sidebar=True)
     else:
-        st.sidebar.markdown(
-            f"""
-            <div style="font-size: 0.78rem; color: #7A6C8A; margin-bottom: 0.75rem;">
+        idle_html = f"""
+            <div class="portfolio-idle-indicator">
                 Showing complete portfolio: <b>{len(df):,}</b> transactions
             </div>
-            """,
-            unsafe_allow_html=True
-        )
+        """
+        from dashboard.utils.dashboard_utils import render_html
+        render_html(idle_html, sidebar=True)
 
     # Data Quality status sidebar card
     render_data_quality_sidebar(df)
@@ -188,16 +187,17 @@ def render_data_quality_sidebar(full_df: pd.DataFrame):
     reconciliation_pass = diff < 1e-4
 
     dq_html = f"""
-    <div class="data-quality-box">
-        <h5>🛡️ Data Quality Status</h5>
-        <div class="dq-item"><span>Audit Status:</span><span class="dq-pass">✓ Validated</span></div>
-        <div class="dq-item"><span>Total Records:</span><span class="dq-val">{len(full_df):,}</span></div>
-        <div class="dq-item"><span>Missing Cells:</span><span class="dq-val">0</span></div>
-        <div class="dq-item"><span>Duplicate Rows:</span><span class="dq-val">0</span></div>
-        <div class="dq-item"><span>Financial Identity:</span><span class="dq-pass">{'PASS' if reconciliation_pass else 'FAIL'}</span></div>
-        <div style="margin-top: 0.45rem; font-size: 0.72rem; color: rgba(122,108,138,0.85); line-height: 1.35;">
-            <b>Date Integrity Note:</b> Orders span 2024–2025. Ship dates extend into future periods and are preserved without modification. All trend analytics use Order Date.
+        <div class="data-quality-box">
+            <h5>🛡️ Data Quality Status</h5>
+            <div class="dq-item"><span>Audit Status:</span><span class="dq-pass">✓ Validated</span></div>
+            <div class="dq-item"><span>Total Records:</span><span class="dq-val">{len(full_df):,}</span></div>
+            <div class="dq-item"><span>Missing Cells:</span><span class="dq-val">0</span></div>
+            <div class="dq-item"><span>Duplicate Rows:</span><span class="dq-val">0</span></div>
+            <div class="dq-item"><span>Financial Identity:</span><span class="dq-pass">{'PASS' if reconciliation_pass else 'FAIL'}</span></div>
+            <div style="margin-top: 0.45rem; font-size: 0.72rem; color: rgba(122,108,138,0.85); line-height: 1.35;">
+                <b>Date Integrity Note:</b> Orders span 2024–2025. Ship dates extend into future periods and are preserved without modification. All trend analytics use Order Date.
+            </div>
         </div>
-    </div>
     """
-    st.sidebar.markdown(dq_html, unsafe_allow_html=True)
+    from dashboard.utils.dashboard_utils import render_html
+    render_html(dq_html, sidebar=True)

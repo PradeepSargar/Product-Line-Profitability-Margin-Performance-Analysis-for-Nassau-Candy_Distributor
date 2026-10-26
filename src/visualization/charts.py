@@ -59,18 +59,18 @@ SEGMENT_COLORS = {
 }
 
 
-def _common_layout(fig, title, height=450):
-    """Apply consistent Golden Ticket layout and styling to all charts."""
-    # First apply the global style_fig helper
-    fig = style_fig(fig)
+def _common_layout(fig, title, height=520):
+    """Apply consistent Golden Ticket layout with professional spacious margins."""
+    fig = style_fig(fig, height=height, compact=True)
 
     fig.update_layout(
         title=dict(
             text=title,
-            font=dict(size=15, color=PALETTE['wonka_purple'], family='Segoe UI, Inter, sans-serif')
+            font=dict(size=16.5, color=PALETTE['wonka_purple'], family='Segoe UI, Inter, sans-serif')
         ),
-        height=height,
-        margin=dict(l=60, r=30, t=60, b=50),
+        autosize=True,
+        width=None,
+        margin=dict(l=58, r=26, t=66, b=58),
     )
     return fig
 
@@ -103,7 +103,7 @@ def chart_revenue_vs_profit_by_product(product_df, top_n=None):
         hovertemplate='%{y}<br>Gross Profit: $%{x:,.2f}<extra></extra>',
     ))
 
-    fig = _common_layout(fig, 'Revenue vs Gross Profit by Product', height=max(350, len(df) * 35))
+    fig = _common_layout(fig, 'Revenue vs Gross Profit by Product', height=max(460, len(df) * 46))
     fig.update_layout(barmode='group', yaxis=dict(title=''))
     fig.update_xaxes(title_text='Amount ($)')
     return fig
@@ -129,7 +129,7 @@ def chart_profit_contribution_by_product(product_df, top_n=None):
         orientation='h', marker_color=colors,
         hovertemplate='%{y}<br>Profit Contribution: %{x:.2f}%<extra></extra>',
     ))
-    fig = _common_layout(fig, 'Profit Contribution by Product (%)', height=max(350, len(df) * 30))
+    fig = _common_layout(fig, 'Profit Contribution by Product (%)', height=max(460, len(df) * 40))
     fig.update_xaxes(title_text='Contribution (%)')
     fig.update_yaxes(title_text='')
     return fig
@@ -147,7 +147,7 @@ def chart_division_revenue_contribution(div_df):
         textposition='inside', textinfo='label+percent',
         hovertemplate='%{label}<br>Revenue: $%{value:,.2f}<br>Share: %{percent}<extra></extra>',
     )
-    fig = _common_layout(fig, 'Revenue Contribution by Division', height=380)
+    fig = _common_layout(fig, 'Revenue Contribution by Division', height=500)
     return fig
 
 
@@ -163,7 +163,7 @@ def chart_division_profit_contribution(div_df):
         textposition='inside', textinfo='label+percent',
         hovertemplate='%{label}<br>Gross Profit: $%{value:,.2f}<br>Share: %{percent}<extra></extra>',
     )
-    fig = _common_layout(fig, 'Profit Contribution by Division', height=380)
+    fig = _common_layout(fig, 'Profit Contribution by Division', height=500)
     return fig
 
 
@@ -190,7 +190,7 @@ def chart_gross_profit_by_product(product_df):
         marker_color=colors,
         hovertemplate='%{y}<br>Gross Profit: $%{x:,.2f}<extra></extra>',
     ))
-    fig = _common_layout(fig, 'Gross Profit by Product', height=max(400, len(df) * 30))
+    fig = _common_layout(fig, 'Gross Profit by Product', height=max(500, len(df) * 40))
     fig.update_xaxes(title_text='Gross Profit ($)')
     fig.update_yaxes(title_text='')
     return fig
@@ -218,7 +218,7 @@ def chart_gross_margin_by_product(product_df):
         orientation='h', marker_color=colors,
         hovertemplate='%{y}<br>Gross Margin: %{x:.2f}%<extra></extra>',
     ))
-    fig = _common_layout(fig, 'Gross Margin % by Product', height=max(400, len(df) * 30))
+    fig = _common_layout(fig, 'Gross Margin % by Product', height=max(500, len(df) * 40))
     fig.update_xaxes(title_text='Gross Margin (%)', range=[0, 100])
     fig.update_yaxes(title_text='')
 
@@ -252,7 +252,7 @@ def chart_revenue_vs_profit_contribution(product_df):
         marker_color=PALETTE['golden_ticket'],
         hovertemplate='%{y}<br>Profit Share: %{x:.2f}%<extra></extra>',
     ))
-    fig = _common_layout(fig, 'Revenue vs Profit Contribution (%)', height=max(400, len(df) * 30))
+    fig = _common_layout(fig, 'Revenue vs Profit Contribution (%)', height=max(500, len(df) * 40))
     fig.update_layout(barmode='group')
     fig.update_xaxes(title_text='Contribution (%)')
     fig.update_yaxes(title_text='')
@@ -476,7 +476,7 @@ def chart_pareto(pareto_df, value_col, cumulative_col, title, value_label):
         yref='y2'
     )
 
-    fig = _common_layout(fig, title, height=480)
+    fig = _common_layout(fig, title, height=580)
     fig.update_layout(
         yaxis=dict(title=value_label, side='left'),
         yaxis2=dict(title='Cumulative (%)', side='right', overlaying='y',
@@ -640,7 +640,7 @@ def chart_strategic_matrix(product_df):
         },
     )
 
-    fig = _common_layout(fig, 'Strategic Product Portfolio Matrix (2×2)', height=520)
+    fig = _common_layout(fig, 'Strategic Product Portfolio Matrix (2×2)', height=640)
 
     # Median threshold reference lines in muted neutral
     fig.add_vline(
@@ -709,7 +709,7 @@ def chart_revenue_profit_contribution_scatter(product_df):
     )
 
     max_val = max(df['Revenue Contribution %'].max(), df['Profit Contribution %'].max()) * 1.15
-    fig = _common_layout(fig, 'Revenue vs Profit Contribution Disparity', height=480)
+    fig = _common_layout(fig, 'Revenue vs Profit Contribution Disparity', height=560)
 
     fig.add_trace(go.Scatter(
         x=[0, max_val], y=[0, max_val],
@@ -738,7 +738,7 @@ def chart_margin_distribution(df, group_col='Division'):
         color_discrete_map=palette,
         points='outliers',
     )
-    fig = _common_layout(fig, f'Gross Margin % Distribution by {group_col}', height=420)
+    fig = _common_layout(fig, f'Gross Margin % Distribution by {group_col}', height=500)
     fig.update_xaxes(title_text=group_col)
     fig.update_yaxes(title_text='Gross Margin (%)', range=[0, 100])
     fig.update_layout(showlegend=False)

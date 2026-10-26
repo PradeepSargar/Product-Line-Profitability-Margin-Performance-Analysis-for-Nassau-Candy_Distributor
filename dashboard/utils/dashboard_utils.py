@@ -16,6 +16,32 @@ def get_cached_data() -> pd.DataFrame:
     return get_clean_dataset()
 
 
+def clean_html(html_str: str) -> str:
+    """
+    Strip all leading and trailing whitespace from every line in an HTML string.
+    This guarantees that lines never begin with 4+ spaces or tabs, which would
+    cause Markdown parsers to convert them into <pre><code> indented code blocks.
+    """
+    if not html_str:
+        return ""
+    lines = [line.strip() for line in html_str.splitlines()]
+    return "\n".join(lines)
+
+
+def render_html(html_str: str, sidebar: bool = False):
+    """
+    Safely render HTML in Streamlit without risk of Markdown code block escaping.
+    Uses st.html / st.sidebar.html if supported (Streamlit 1.34+), or
+    st.markdown / st.sidebar.markdown with zero-indented HTML.
+    """
+    cleaned = clean_html(html_str)
+    target = st.sidebar if sidebar else st
+    if hasattr(target, "html"):
+        target.html(cleaned)
+    else:
+        target.markdown(cleaned, unsafe_allow_html=True)
+
+
 def format_currency(val: float, compact: bool = False) -> str:
     """Format numeric value as currency ($#,##0.00 or $#,##0.0K)."""
     if val is None or pd.isna(val):
@@ -44,20 +70,29 @@ def format_integer(val: int) -> str:
 
 def render_empty_state(message: str = "No transactions match the current filter selection."):
     """Render a standardized executive empty state with reset option."""
-    st.warning(f"⚠️ {message}")
-    st.info("Try broadening your date window, selecting additional divisions/regions, or clearing the product search query.")
+    html = f"""
+        <div class="empty-state-card">
+            <div class="empty-state-title">No data for this selection</div>
+            <p class="empty-state-body">{message}</p>
+            <p class="empty-state-body" style="margin-top: 0.45rem;">
+                Try broadening your date window, selecting additional divisions or regions,
+                or clearing the product search query. Use <b>Reset All Filters</b> in the sidebar to restore the full portfolio.
+            </p>
+        </div>
+    """
+    render_html(html)
 
 
 def render_footer():
     """Render a subtle, professional corporate footer."""
     footer_html = """
-    <div class="app-footer">
-        <div>
-            <b>Nassau Candy Distributor</b> — Product Line Profitability & Margin Performance Analysis
+        <div class="app-footer">
+            <div>
+                <b>Nassau Candy Distributor</b> — Product Line Profitability &amp; Margin Performance Analysis
+            </div>
+            <div>
+                Data Analytics Portfolio Project • Executive Decision Support System
+            </div>
         </div>
-        <div>
-            Data Analytics Portfolio Project • Executive Decision Support System
-        </div>
-    </div>
     """
-    st.markdown(footer_html, unsafe_allow_html=True)
+    render_html(footer_html)

@@ -16,7 +16,7 @@ from src.analysis import (
     segmentation,
     risk_analysis,
 )
-from dashboard.pages import (
+from dashboard.views import (
     executive_overview,
     product_profitability,
     business_performance,

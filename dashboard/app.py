@@ -17,11 +17,9 @@ if PROJECT_ROOT not in sys.path:
 from dashboard.styles import theme
 from dashboard.utils import dashboard_utils
 from dashboard.components import header, filters
-from dashboard.pages import (
+from dashboard.views import (
     executive_overview,
     product_profitability,
-    business_performance,
-    strategic_analysis,
     risk_diagnostics,
 )
 
@@ -53,13 +51,24 @@ def main():
         st.stop()
 
     # 5. Global Sidebar Navigation
+    dashboard_utils.render_html(
+        """
+        <div class="sidebar-brand">
+            <div class="sidebar-brand-title">Executive BI</div>
+            <div class="sidebar-brand-sub">Nassau Candy profitability &amp; margin analytics</div>
+        </div>
+        """,
+        sidebar=True,
+    )
     st.sidebar.markdown("### 🧭 Navigation")
+    dashboard_utils.render_html(
+        '<div class="sidebar-nav-caption">Choose a view — filters below apply to every page.</div>',
+        sidebar=True,
+    )
     pages = {
-        "01 — Executive Overview": executive_overview,
-        "02 — Product Profitability": product_profitability,
-        "03 — Business Performance": business_performance,
-        "04 — Strategic Analysis": strategic_analysis,
-        "05 — Risk Diagnostics": risk_diagnostics,
+        "📊  Executive Overview": executive_overview,
+        "🏆  Product & Portfolio Intelligence": product_profitability,
+        "⚠️  Risk & Business Performance": risk_diagnostics,
     }
 
     selected_page_name = st.sidebar.radio(
